@@ -1,0 +1,11 @@
+diff --git a/src/Plugin/Sitemap/Menu.php b/src/Plugin/Sitemap/Menu.php
+index ee4c78b..a6f86f8 100644
+--- a/src/Plugin/Sitemap/Menu.php
++++ b/src/Plugin/Sitemap/Menu.php
+@@ -63,6 +63,7 @@ class Menu extends SitemapBase {
+     $manipulators = [
+       ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+       ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
++      ['callable' => 'u4_menu.language_tree_manipulator:filterLanguage'],
+     ];
+     $tree = $menuLinkTree->transform($tree, $manipulators);

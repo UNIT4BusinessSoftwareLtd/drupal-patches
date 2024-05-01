@@ -1,0 +1,57 @@
+diff --git a/search_api_exclude.module b/search_api_exclude.module
+index 53a4170..157e432 100644
+--- a/search_api_exclude.module
++++ b/search_api_exclude.module
+@@ -25,21 +25,25 @@ function search_api_exclude_form_node_form_alter(&$form, FormStateInterface $for
+     return;
+   }
+ 
+-  $form['search_api_exclude'] = [
+-    '#type' => 'details',
+-    '#title' => t('Search API Exclude'),
+-    '#group' => 'advanced',
+-    '#tree' => TRUE,
+-    '#open' => $node->get('sae_exclude')->getString(),
+-  ];
+-
+-  $form['search_api_exclude']['exclude'] = [
+-    '#type' => 'checkbox',
+-    '#title' => t('Prevent this node from being indexed.'),
+-    '#default_value' => $node->get('sae_exclude')->getString(),
+-  ];
+-
+-  $form['#entity_builders'][] = 'search_api_exclude_form_node_form_builder';
++  $sae_exclude_field = $node->getFieldDefinition('sae_exclude');
++  if (!$sae_exclude_field->isTranslatable() && $node->isDefaultTranslation() || $sae_exclude_field->isTranslatable()) {
++
++    $form['search_api_exclude'] = [
++      '#type'  => 'details',
++      '#title' => t('Search API Exclude'),
++      '#group' => 'advanced',
++      '#tree'  => TRUE,
++      '#open'  => $node->get('sae_exclude')->getString(),
++    ];
++
++    $form['search_api_exclude']['exclude'] = [
++      '#type'          => 'checkbox',
++      '#title'         => t('Prevent this node from being indexed.'),
++      '#default_value' => $node->get('sae_exclude')->getString(),
++    ];
++
++    $form['#entity_builders'][] = 'search_api_exclude_form_node_form_builder';
++  }
+ }
+ 
+ /**
+@@ -98,8 +102,9 @@ function search_api_exclude_entity_base_field_info(EntityTypeInterface $entity_t
+ 
+   if ($entity_type->id() === 'node') {
+     $fields['sae_exclude'] = BaseFieldDefinition::create('boolean')
+-      ->setLabel(t('Search API Exclude'))
+-      ->setDescription(t('Specify whether the node may be indexed or not.'));
++                                                ->setLabel(t('Search API Exclude'))
++                                                ->setDescription(t('Specify whether the node may be indexed or not.'))
++                                                ->setTranslatable(TRUE);
+   }
+ 
+   return $fields;

@@ -1,0 +1,12 @@
+diff --git a/core/modules/system/src/Plugin/Block/SystemMenuBlock.php b/core/modules/system/src/Plugin/Block/SystemMenuBlock.php
+index 463b6800b8..297fa987dd 100644
+--- a/core/modules/system/src/Plugin/Block/SystemMenuBlock.php
++++ b/core/modules/system/src/Plugin/Block/SystemMenuBlock.php
+@@ -192,6 +192,7 @@ public function build() {
+     $manipulators = [
+       ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+       ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
++      ['callable' => 'u4_menu.language_tree_manipulator:filterLanguage'],
+     ];
+     $tree = $this->menuTree->transform($tree, $manipulators);
+     return $this->menuTree->build($tree);

@@ -1,0 +1,18 @@
+diff --git a/src/Plugin/schema_metatag/PropertyTypeBase.php b/src/Plugin/schema_metatag/PropertyTypeBase.php
+index 9876afc..364b9f4 100644
+--- a/src/Plugin/schema_metatag/PropertyTypeBase.php
++++ b/src/Plugin/schema_metatag/PropertyTypeBase.php
+@@ -246,11 +246,11 @@ public function formElement(array $input_values) {
+
+     $value = $input_values['value'];
+
+-    $form['#type'] = 'textfield';
++    $form['#type'] = 'textarea';
+     $form['#title'] = $input_values['title'];
+     $form['#description'] = $input_values['description'];
+     $form['#default_value'] = !empty($value) ? $value : '';
+-    $form['#maxlength'] = 255;
++    $form['#maxlength'] = 5000;
+
+     return $form;
+   }

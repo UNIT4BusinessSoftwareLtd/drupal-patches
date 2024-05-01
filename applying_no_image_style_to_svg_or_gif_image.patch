@@ -1,0 +1,26 @@
+diff --git a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+index 7448968..d3e1bd9 100644
+--- a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
++++ b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+@@ -981,9 +981,20 @@ class TwigExtension extends \Twig_Extension {
+       return $file_uri;
+     }
+
++    // Check whether the image type is SVG.
++    $is_svg_or_gif = FALSE;
++    $files = \Drupal::entityTypeManager()->getStorage('file')
++        ->loadByProperties(['uri' => $file_uri]);
++    if ($files) {
++        $imageFile = reset($files);
++        if (in_array($imageFile->getMimeType(), ['image/gif', 'image/svg+xml'])) {
++            $is_svg_or_gif = TRUE;
++        }
++    }
++
+     // Try and load the given image style.
+     try {
+-      if ($image_style != '') {
++      if ($image_style != '' && !$is_svg_or_gif) {
+         if ($is = $this->entityTypeManager->getStorage('image_style')->load($image_style)) {
+           $url = $is->buildUrl($file_uri);
+           $url = parse_url($url);

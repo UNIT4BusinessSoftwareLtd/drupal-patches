@@ -1,0 +1,12 @@
+diff --git a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+index 4e48c83..d7f08f2 100644
+--- a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
++++ b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+@@ -1646,6 +1646,8 @@ class TwigExtension extends \Twig_Extension {
+         ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+         // Use the default sorting of menu links.
+         ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
++        // Only translations which match the current content language.
++        ['callable' => 'u4_menu.language_tree_manipulator:filterLanguage'],
+       ];
+       $tree = $menu_tree->transform($tree, $manipulators);

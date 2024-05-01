@@ -1,0 +1,47 @@
+diff --git a/modules/sitestudio_claro/sitestudio_claro.module b/modules/sitestudio_claro/sitestudio_claro.module
+index f49d6ad..746b385 100644
+--- a/modules/sitestudio_claro/sitestudio_claro.module
++++ b/modules/sitestudio_claro/sitestudio_claro.module
+@@ -188,24 +188,24 @@ function sitestudio_claro_theme_registry_alter(&$theme_registry) {
+     }
+   }
+
+-  if (!in_array('pager', $theme_registry)) {
+-    $template = 'pager';
+-    $path = $claroThemePath . '/templates';
+-    if (sitestudio_claro_template_exists($path, $template)) {
+-      $theme_registry['pager'] = [
+-        'template' => $template,
+-        'render element' => 'pager',
+-        'path' => $path,
+-        'type' => 'base_theme_engine',
+-        'theme path' => $claroThemePath,
+-        'preprocess functions' => [
+-          'template_preprocess',
+-          'template_preprocess_pager',
+-          'contextual_preprocess',
+-        ],
+-      ];
+-    }
+-  }
++  // if (!in_array('pager', $theme_registry)) {
++  //   $template = 'pager';
++  //   $path = $claroThemePath . '/templates';
++  //   if (sitestudio_claro_template_exists($path, $template)) {
++  //     $theme_registry['pager'] = [
++  //       'template' => $template,
++  //       'render element' => 'pager',
++  //       'path' => $path,
++  //       'type' => 'base_theme_engine',
++  //       'theme path' => $claroThemePath,
++  //       'preprocess functions' => [
++  //         'template_preprocess',
++  //         'template_preprocess_pager',
++  //         'contextual_preprocess',
++  //       ],
++  //     ];
++  //   }
++  // }
+
+   if (!in_array('views_view__media_library', $theme_registry)) {
+     $template = 'views-view--media-library';

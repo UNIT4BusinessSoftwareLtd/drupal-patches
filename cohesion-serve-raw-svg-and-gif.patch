@@ -1,0 +1,25 @@
+diff --git a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+index 7e8440c..6a94158 100644
+--- a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
++++ b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+@@ -1242,9 +1242,19 @@ class TwigExtension extends AbstractExtension {
+       return $url;
+     }
+ 
++    $serve_raw_file = FALSE;
++    $files = \Drupal::entityTypeManager()->getStorage('file')
++      ->loadByProperties(['uri' => $file_uri]);
++    if ($files) {
++      $image_file = reset($files);
++      if (in_array($image_file->getMimeType(), ['image/gif', 'image/svg+xml'])) {
++        $serve_raw_file = TRUE;
++      }
++    }
++
+     // Try and load the given image style.
+     try {
+-      if ($image_style != '') {
++      if ($image_style != '' && !$serve_raw_file) {
+         $image_style_instance = $this->entityTypeManager->getStorage('image_style')->load($image_style);
+         if ($image_style_instance instanceof ImageStyle && $image_style_instance->supportsUri($file_uri)) {
+           $url = $image_style_instance->buildUrl($file_uri);

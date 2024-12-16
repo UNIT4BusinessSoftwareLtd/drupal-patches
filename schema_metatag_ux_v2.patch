@@ -1,0 +1,19 @@
+diff --git a/src/SchemaMetatagManager.php b/src/SchemaMetatagManager.php
+index c57f4c5..a1bdc10 100644
+--- a/src/SchemaMetatagManager.php
++++ b/src/SchemaMetatagManager.php
+@@ -237,7 +237,13 @@ public static function countNumericKeys($item) {
+    */
+   public static function explode($value, $separator = ',') {
+     if (is_string($value)) {
+-      $value = explode($separator, $value);
++      if ($separator == ',') {
++        $value = preg_split('/\r\n|\r|\n/', $value);
++      }
++      else {
++        $value = explode($separator, $value);
++      }
++
+     }
+     if (is_array($value)) {
+       $value = array_map('trim', $value);

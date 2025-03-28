@@ -9,5 +9,3 @@
 
  # Information added by Drupal.org packaging script on 2023-07-28
  version: '8.x-1.0-beta2'
- project: 'request_data_conditions'
- datestamp: 1690552599

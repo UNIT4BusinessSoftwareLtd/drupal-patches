@@ -1,0 +1,13 @@
+diff --git a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+index 87ade77..ab7a519 100644
+--- a/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
++++ b/modules/cohesion_templates/src/TwigExtension/TwigExtension.php
+@@ -1530,7 +1530,7 @@ class TwigExtension extends AbstractExtension {
+     // Infinite scroll, force AJAX enabled.
+     if (isset($view_data['settings']['pager']['view_pager']) && $view_data['settings']['pager']['view_pager'] == 'infinite_scroll') {
+       $view->setAjaxEnabled(TRUE);
+-      views_views_pre_render($view);
++      \Drupal::classResolver(\Drupal\views\Hook\ViewsHooks::class)->viewsPreRender($view);
+     }
+
+     // If pager is active.

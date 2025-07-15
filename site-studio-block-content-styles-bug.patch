@@ -1,0 +1,13 @@
+diff --git a/src/EventSubscriber/CohesionHtmlResponseSubscriber.php b/src/EventSubscriber/CohesionHtmlResponseSubscriber.php
+index 10c897f..671a462 100644
+--- a/src/EventSubscriber/CohesionHtmlResponseSubscriber.php
++++ b/src/EventSubscriber/CohesionHtmlResponseSubscriber.php
+@@ -58,7 +58,7 @@ class CohesionHtmlResponseSubscriber implements EventSubscriberInterface {
+    * {@inheritdoc}
+    */
+   public static function getSubscribedEvents() {
+-    $events[KernelEvents::RESPONSE][] = ['onRespondEarly', 3];
++    $events[KernelEvents::RESPONSE][] = ['onRespondEarly'];
+
+     return $events;
+   }
